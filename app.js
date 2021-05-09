@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const placesRoutes = require('./routes/places-routes');
 const usersRoutes = require('./routes/users-routes');
@@ -9,7 +10,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.use('/api/places',placesRoutes);  // => /api/places...
+app.use('/api/places',placesRoutes);
 
 app.use('/api/users',usersRoutes);
 
@@ -26,16 +27,15 @@ app.use((error,req,res,next)=>{
 	res.json({message:error.message || 'An unknown error occured!'});
 });
 
-// app.use(bodyParser.urlencoded({extended:false}));
-
-// app.post('/user',(req,res,next)=>{
-// 	res.send(`<h1>${req.body.username}</h1>`)
-// });
-
-
-// app.get('/',(req,res,next)=>{
-// 	res.send('<form action="/user" method="POST"><input type="text" name="username"><button type="submit">Create User</button></form>');
-// });
-
-app.listen(5000);
+mongoose
+	.connect(
+		'mongodb+srv://dinesh:zL6iRSuHPozyNClo@cluster0.9x4kv.mongodb.net/places?retryWrites=true&w=majority',
+		{ useUnifiedTopology: true }
+	)
+	.then(()=>{
+		app.listen(5000);
+	})
+	.catch(err=>{
+		console.log(err);
+	})
 
