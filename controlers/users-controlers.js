@@ -40,7 +40,7 @@ const signup = async(req,res,next) => {
 		name,
 		email,
 		password,
-		image: 'https://picsum.photos/200',
+		image: req.file.path,
 		places:[]
 	});
 
