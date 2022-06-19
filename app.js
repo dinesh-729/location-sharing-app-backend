@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const placesRoutes = require('./routes/places-routes');
@@ -11,7 +10,7 @@ const HttpError = require('./models/http-error');
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.use('/uploads/images', express.static(path.join('uploads','images')));
 

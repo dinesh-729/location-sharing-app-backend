@@ -1,7 +1,6 @@
 // for test purpose
 
 const express = require('express');
-const bodyParser = require('body-parser');
 
 const MongoClient = require('mongodb').MongoClient;
 
@@ -51,7 +50,7 @@ const getProducts = async (req,res,next) => {
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.post('/products',createProduct);
 
